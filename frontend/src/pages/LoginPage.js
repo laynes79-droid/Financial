@@ -14,9 +14,8 @@ const LoginPage = () => {
         try {
             const response = await loginUser({ username, password });
             console.log('Login successful:', response.data);
-            // Here you would typically save the token and redirect the user
-            // For example: localStorage.setItem('token', response.data.token);
-            // window.location.href = '/dashboard';
+            localStorage.setItem('token', response.data.token);
+            window.location.href = '/dashboard';
         } catch (err) {
             setError('Falha no login. Verifique suas credenciais.');
             console.error('Login error:', err);

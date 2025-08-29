@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import DashboardPage from './pages/DashboardPage';
 import TransactionsPage from './pages/TransactionsPage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -17,8 +18,10 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegistrationPage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/transactions" element={<TransactionsPage />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/transactions" element={<TransactionsPage />} />
+            </Route>
             <Route path="/" element={<div><h2>Página Inicial</h2><p>Bem-vindo ao Minhas Finanças!</p></div>} />
           </Routes>
         </main>

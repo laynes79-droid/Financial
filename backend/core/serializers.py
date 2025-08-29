@@ -22,6 +22,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class TransactionSerializer(serializers.ModelSerializer):
+    category_name = serializers.CharField(source='category.name', read_only=True)
+
     class Meta:
         model = Transaction
-        fields = ['id', 'account', 'category', 'transaction_type', 'amount', 'description', 'date']
+        fields = ['id', 'account', 'category', 'category_name', 'transaction_type', 'amount', 'description', 'date']
