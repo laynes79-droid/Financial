@@ -1,0 +1,12 @@
+.summary-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.chart-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+}

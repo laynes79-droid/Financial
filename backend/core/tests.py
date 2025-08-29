@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.utils import timezone
 from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
 from rest_framework import status
@@ -111,3 +112,45 @@ class CoreAPITestCase(TestCase):
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Transaction.objects.count(), 0)
+
+    def test_dashboard_data(self):
+        # Create some transactions for the current month
+        now = timezone.now()
+        Transaction.objects.create(
+            account=self.account,
+            category=self.category,
+            transaction_type='EXPENSE',
+            amount='100.00',
+            description='Test Expense 1',
+            date=now.date()
+        )
+        Transaction.objects.create(
+            account=self.account,
+            transaction_type='INCOME',
+            amount='500.00',
+            description='Test Income',
+            date=now.date()
+        )
+        # And one for a previous month
+        Transaction.objects.create(
+            account=self.account,
+            category=self.category,
+            transaction_type='EXPENSE',
+            amount='50.00',
+            description='Old Expense',
+            date=(now - timezone.timedelta(days=40)).date()
+        )
+        self.account.balance = 400.00
+        self.account.save()
+
+        url = '/api/dashboard/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        data = response.data
+        self.assertEqual(data['total_balance'], 400.00)
+        self.assertEqual(data['total_income'], 500.00)
+        self.assertEqual(data['total_expenses'], 100.00)
+        self.assertEqual(len(data['expenses_by_category']), 1)
+        self.assertEqual(data['expenses_by_category'][0]['category__name'], 'Groceries')
+        self.assertEqual(float(data['expenses_by_category'][0]['total']), 100.00)

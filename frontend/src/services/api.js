@@ -56,5 +56,10 @@ export const deleteTransaction = (id) => {
     return api.delete(`/transactions/${id}/`);
 };
 
+// Dashboard services
+export const getDashboardData = () => {
+    return api.get('/dashboard/');
+};
+
 
 export default api;
