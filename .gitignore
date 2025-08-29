@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.egg-info/
+*.egg
+dist/
+build/
+*.so
+*.sqlite3
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
