@@ -4,6 +4,24 @@
 
 Minhas Finanças é uma aplicação de gestão financeira pessoal que permite aos usuários controlar suas despesas e receitas de forma simples e eficaz. O projeto é composto por um backend em Django e um frontend em React.
 
+## Como Executar com Docker (Recomendado)
+
+A maneira mais simples e recomendada de executar este projeto é usando Docker e Docker Compose. Isso garante um ambiente consistente e resolve todas as dependências automaticamente.
+
+1. **Pré-requisitos:**
+   - [Docker](https://docs.docker.com/get-docker/)
+   - [Docker Compose](https://docs.docker.com/compose/install/)
+
+2. **Execute a Aplicação:**
+   Na raiz do projeto (onde o arquivo `docker-compose.yml` está localizado), execute o seguinte comando:
+   ```bash
+   docker-compose up --build
+   ```
+   - O backend estará disponível em `http://localhost:8000`.
+   - O frontend estará disponível em `http://localhost:3000`.
+
+O banco de dados será salvo em um volume do Docker, garantindo que os dados persistam entre as execuções.
+
 ## Funcionalidades
 
 - **Autenticação de Usuários:** Sistema de login e registro para acesso seguro.
