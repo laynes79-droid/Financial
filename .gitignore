@@ -12,6 +12,7 @@ dist/
 build/
 *.so
 *.sqlite3
+db.sqlite3
 
 # Node
 node_modules/
@@ -23,3 +24,6 @@ yarn-error.log
 .vscode/
 *.swp
 *.swo
+
+# Documentation
+INSTRUCOES_DEV.md
